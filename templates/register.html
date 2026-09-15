@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="form-card">
+    <h1>حساب جديد</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('register') }}" method="post">
+        <input type="text" name="username" placeholder="اسم المستخدم" required autofocus>
+        <input type="password" name="password" placeholder="كلمة السر" required>
+        <input type="password" name="confirmation" placeholder="تأكيد كلمة السر" required>
+        <button type="submit">إنشاء الحساب</button>
+    </form>
+
+    <p class="form-footer">
+        عندك حساب؟ <a href="{{ url_for('login') }}">تسجيل دخول</a>
+    </p>
+</div>
+{% endblock %}

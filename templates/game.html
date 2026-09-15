@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="game-wrapper">
+    <h1>أهلاً، {{ username }} 👋</h1>
+
+    <div class="controls">
+        <label for="difficulty">مستوى الكمبيوتر:</label>
+        <select id="difficulty">
+            <option value="easy">سهل</option>
+            <option value="hard" selected>صعب (لا يُقهر)</option>
+        </select>
+        <button id="reset-btn">لعبة جديدة</button>
+    </div>
+
+    <div id="status" class="status">دورك (X)</div>
+
+    <div id="board" class="board">
+        {% for i in range(9) %}
+        <div class="cell" data-index="{{ i }}"></div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='game.js') }}"></script>
+{% endblock %}

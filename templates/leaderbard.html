@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="leaderboard-wrapper">
+    <h1>لوحة المتصدرين</h1>
+
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>اللاعب</th>
+                <th>فوز</th>
+                <th>خسارة</th>
+                <th>تعادل</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ player.username }}</td>
+                <td>{{ player.wins }}</td>
+                <td>{{ player.losses }}</td>
+                <td>{{ player.draws }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">لسه مفيش نتايج مسجلة</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

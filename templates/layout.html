@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="logo">Tic-Tac-Toe Arena</a>
+        <div class="nav-links">
+            {% if session.user_id %}
+                <a href="{{ url_for('index') }}">العب</a>
+                <a href="{{ url_for('leaderboard') }}">المتصدرين</a>
+                <span class="username">{{ session.username }}</span>
+                <a href="{{ url_for('logout') }}">خروج</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">دخول</a>
+                <a href="{{ url_for('register') }}">حساب جديد</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
