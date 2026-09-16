@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Tic-Tac-Toe Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <a href="{{ url_for('index') }}" class="logo">Tic-Tac-Toe Arena</a>
         <div class="nav-links">
             {% if session.user_id %}
-                <a href="{{ url_for('index') }}">العب</a>
-                <a href="{{ url_for('leaderboard') }}">المتصدرين</a>
+                <a href="{{ url_for('index') }}">Play</a>
+                <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
                 <span class="username">{{ session.username }}</span>
-                <a href="{{ url_for('logout') }}">خروج</a>
+                <a href="{{ url_for('logout') }}">Log out</a>
             {% else %}
-                <a href="{{ url_for('login') }}">دخول</a>
-                <a href="{{ url_for('register') }}">حساب جديد</a>
+                <a href="{{ url_for('login') }}">Log in</a>
+                <a href="{{ url_for('register') }}">Register</a>
             {% endif %}
         </div>
     </nav>

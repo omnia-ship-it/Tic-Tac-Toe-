@@ -46,7 +46,7 @@ body {
     padding: 0 16px;
 }
 
-/* نموذج الدخول والتسجيل */
+/* Login and register form */
 .form-card {
     background: white;
     border-radius: 12px;
@@ -93,7 +93,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* اللعبة */
+/* Game board */
 .game-wrapper {
     text-align: center;
 }
@@ -171,7 +171,7 @@ body {
     cursor: not-allowed;
 }
 
-
+/* Leaderboard */
 .leaderboard-wrapper {
     text-align: center;
 }

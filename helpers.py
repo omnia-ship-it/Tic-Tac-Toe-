@@ -1,16 +1,17 @@
 import random
 
+
 WIN_LINES = [
-    (0, 1, 2), (3, 4, 5), (6, 7, 8),   
-    (0, 3, 6), (1, 4, 7), (2, 5, 8),  
-    (0, 4, 8), (2, 4, 6),             
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),   # rows
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),   # columns
+    (0, 4, 8), (2, 4, 6),              # diagonals
 ]
 
 
 def check_winner(board):
     """
-    بترجع "X" أو "O" لو حد فاز، أو None لو مفيش فايز لسه.
-    board: list من 9 عناصر (None, "X", "O")
+    Returns "X" or "O" if someone has won, or None if there's no winner yet.
+    board: a list of 9 items (None, "X", "O")
     """
     for a, b, c in WIN_LINES:
         if board[a] is not None and board[a] == board[b] == board[c]:
@@ -28,9 +29,10 @@ def available_moves(board):
 
 def minimax(board, is_maximizing):
     """
-    خوارزمية Minimax الكلاسيكية.
-    الكمبيوتر ("O") هو الـ maximizing player، واللاعب ("X") هو الـ minimizing player.
-    بترجع قيمة تقييم الحالة الحالية للوحة: +1 لصالح O، -1 لصالح X، 0 للتعادل.
+    The classic Minimax algorithm.
+    The computer ("O") is the maximizing player, and the human ("X") is the
+    minimizing player. Returns the evaluation score of the current board
+    state: +1 favors O, -1 favors X, 0 is a draw.
     """
     winner = check_winner(board)
     if winner == "O":
@@ -60,9 +62,9 @@ def minimax(board, is_maximizing):
 
 def best_move(board, difficulty="hard"):
     """
-    بترجع رقم الخانة (0-8) اللي المفروض الكمبيوتر يلعب فيها.
-    - "easy": حركة عشوائية من الخانات الفاضية
-    - "hard": أفضل حركة ممكنة باستخدام Minimax (اللعبة تبقى مستحيلة الفوز عليها)
+    Returns the cell index (0-8) the computer should play.
+    - "easy": a random move among the empty cells
+    - "hard": the best possible move using Minimax (the game becomes unbeatable)
     """
     moves = available_moves(board)
     if not moves:
@@ -71,6 +73,7 @@ def best_move(board, difficulty="hard"):
     if difficulty == "easy":
         return random.choice(moves)
 
+    
     best_score = -float("inf")
     move_choice = moves[0]
 

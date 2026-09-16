@@ -1,3 +1,4 @@
+// Board state: an array of 9 items (null, "X", "O")
 let board = Array(9).fill(null);
 let gameOver = false;
 
@@ -39,28 +40,28 @@ function setStatus(text) {
 }
 
 function endGame(result) {
-    
+    // result: "win" (player won), "loss" (computer won), "draw"
     gameOver = true;
 
-    if (result === "win") setStatus("🎉 مبروك! كسبتي!");
-    else if (result === "loss") setStatus("😅 خسرتي، جربي تاني");
-    else setStatus("🤝 تعادل!");
+    if (result === "win") setStatus("🎉 You won!");
+    else if (result === "loss") setStatus("😅 You lost, try again");
+    else setStatus("🤝 It's a draw!");
 
-    
+    // Save the result to the server
     fetch("/api/save_result", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ result: result, opponent_type: "ai" }),
-    }).catch(err => console.error("فشل حفظ النتيجة:", err));
+    }).catch(err => console.error("Failed to save result:", err));
 }
 
 async function handleCellClick(e) {
     if (gameOver) return;
 
     const index = parseInt(e.target.dataset.index, 10);
-    if (board[index] !== null) return; 
+    if (board[index] !== null) return; // cell already taken
 
-    
+    // Player's move (X)
     board[index] = "X";
     renderBoard();
 
@@ -74,8 +75,8 @@ async function handleCellClick(e) {
         return;
     }
 
-   
-    setStatus("الكمبيوتر بيفكر... 🤔");
+    // Computer's turn
+    setStatus("Computer is thinking... 🤔");
 
     try {
         const response = await fetch("/api/move", {
@@ -96,11 +97,11 @@ async function handleCellClick(e) {
         } else if (data.game_over) {
             endGame("draw");
         } else {
-            setStatus("دورك (X)");
+            setStatus("Your turn (X)");
         }
     } catch (err) {
-        console.error("فشل الاتصال بالسيرفر:", err);
-        setStatus("حصل خطأ، جربي تحدّثي الصفحة");
+        console.error("Failed to reach the server:", err);
+        setStatus("Something went wrong, please refresh the page");
     }
 }
 
@@ -108,7 +109,7 @@ function resetGame() {
     board = Array(9).fill(null);
     gameOver = false;
     renderBoard();
-    setStatus("دورك (X)");
+    setStatus("Your turn (X)");
 }
 
 cells.forEach(cell => cell.addEventListener("click", handleCellClick));

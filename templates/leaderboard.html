@@ -2,16 +2,16 @@
 
 {% block content %}
 <div class="leaderboard-wrapper">
-    <h1>لوحة المتصدرين</h1>
+    <h1>Leaderboard</h1>
 
     <table class="leaderboard-table">
         <thead>
             <tr>
                 <th>#</th>
-                <th>اللاعب</th>
-                <th>فوز</th>
-                <th>خسارة</th>
-                <th>تعادل</th>
+                <th>Player</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Draws</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +25,7 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="5">لسه مفيش نتايج مسجلة</td>
+                <td colspan="5">No results recorded yet</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -1,40 +1,43 @@
 # Tic-Tac-Toe Arena
 
-#### Video Demo: <رابط الفيديو هنا>
+#### Video Demo: <YOUR YOUTUBE LINK HERE>
 
 ## Description
 
-Tic-Tac-Toe Arena هو تطبيق ويب مبني بـ Flask بيسمح للمستخدمين بإنشاء حساب،
-تسجيل الدخول، ولعب Tic-Tac-Toe ضد كمبيوتر بيستخدم خوارزمية Minimax، بحيث
-مستحيل تكسبيه لما تختاري المستوى "صعب" — أقصى نتيجة ممكنة هي تعادل.
+Tic-Tac-Toe Arena is a web application built with Flask that lets users
+create an account, log in, and play Tic-Tac-Toe against a computer opponent
+powered by the Minimax algorithm. On "hard" difficulty, the computer plays
+optimally, so the best a human player can achieve is a draw.
 
-النتايج (فوز/خسارة/تعادل) بتتسجل في قاعدة بيانات SQLite لكل مستخدم، وفيه
-صفحة "لوحة المتصدرين" بترتب اللاعبين حسب عدد مرات الفوز.
+Game results (win/loss/draw) are saved per user in a SQLite database, and a
+leaderboard page ranks players by their number of wins.
 
 ## Features
 
-- **تسجيل دخول وإنشاء حساب** مع تشفير كلمة السر (werkzeug.security)
-- **لوحة لعب تفاعلية** بالكامل بـ JavaScript، بدون إعادة تحميل الصفحة
-- **AI Opponent** باستخدام خوارزمية Minimax (recursive)، بمستويين: سهل وصعب
-- **حفظ النتائج** في قاعدة بيانات SQLite مرتبطة بكل مستخدم
-- **لوحة متصدرين** بترتيب اللاعبين حسب الفوز
+- **User registration and login**, with passwords hashed using werkzeug.security
+- **Fully interactive game board** built with JavaScript, with no page reloads
+- **AI opponent** using the Minimax algorithm (recursive), with two difficulty levels: easy and hard
+- **Result tracking** stored in a SQLite database linked to each user
+- **Leaderboard** ranking players by number of wins
 
 ## File Structure
 
-- `app.py` — كل الـ Flask routes: تسجيل الدخول، اللعب، حفظ النتائج، المتصدرين
-- `helpers.py` — منطق اللعبة: تحديد الفائز، خوارزمية Minimax، اختيار حركة الكمبيوتر
-- `templates/` — صفحات HTML (layout, login, register, game, leaderboard)
-- `static/styles.css` — التنسيق
-- `static/game.js` — منطق اللعبة على الفرونت اند والتواصل مع السيرفر عبر fetch
+- `app.py` — all Flask routes: login, gameplay, saving results, leaderboard
+- `helpers.py` — game logic: winner detection, the Minimax algorithm, and computer move selection
+- `templates/` — HTML pages (layout, login, register, game, leaderboard)
+- `static/styles.css` — styling
+- `static/game.js` — client-side game logic and communication with the server via fetch
 
 ## Design Choices
 
-- استخدمت **Minimax** بدل حركات عشوائية بالكامل عشان يوضح فهم حقيقي
-  للـ recursion والـ algorithms، وهو معيار شائع في ألعاب زي دي.
-- خليت التحقق من الفوز موجود في مكانين (JavaScript للعرض الفوري، وPython
-  للتأكد من صحة النتيجة قبل حفظها) عشان محدش يقدر يغش من الـ console.
-- استخدمت SQLite بدل ملفات CSV عشان العلاقات بين users وgames والـ queries
-  زي الترتيب في المتصدرين.
+- I used **Minimax** instead of fully random moves to demonstrate a real
+  understanding of recursion and algorithms, which is a common benchmark
+  for this kind of game.
+- Win detection exists in two places (JavaScript for instant feedback, and
+  Python to validate the result before saving it) so that a player can't
+  fake a result by manipulating the browser console.
+- I used SQLite instead of CSV files because of the relationship between
+  users and games, and to support queries like ranking the leaderboard.
 
 ## How to Run
 
@@ -43,4 +46,4 @@ pip install flask
 python app.py
 ```
 
-بعدين افتحي المتصفح على `http://127.0.0.1:5000`
+Then open your browser at `http://127.0.0.1:5000`
